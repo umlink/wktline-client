@@ -1,3 +1,15 @@
-# README
+# Wktline 项目管理前端
 
-`@umijs/max` 模板项目，更多功能参考 [Umi Max 简介](https://umijs.org/docs/max/introduce)
+1. 安装依赖
+```base
+yarn
+```
+2. 启动
+```base
+yarn run dev
+```
+3. 同步 api
+> 注意项目根目录下的 `openapi.config.ts` 配置
+```base
+yarn run genapi
+```
