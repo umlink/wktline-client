@@ -1,0 +1,52 @@
+{
+  "private": true,
+  "author": "umlink <link_0403@163.com>",
+  "scripts": {
+    "build": "max build",
+    "dev": "max dev",
+    "format": "prettier --cache --write .",
+    "genapi": "ts-node openapi.config.ts",
+    "postinstall": "max setup",
+    "prepare": "husky install",
+    "publish": "max build && scp -r ./dist/* root@121.40.42.56:/usr/share/nginx/html/",
+    "setup": "max setup",
+    "start": "npm run dev"
+  },
+  "dependencies": {
+    "@ant-design/plots": "^2.1.15",
+    "@dnd-kit/core": "^6.0.8",
+    "@dnd-kit/modifiers": "^6.0.1",
+    "@dnd-kit/sortable": "^7.0.2",
+    "@dnd-kit/utilities": "^3.2.1",
+    "@icon-park/react": "^1.4.2",
+    "@umijs/max": "^4.1.6",
+    "@umlink/rc-gantt": "^0.0.1",
+    "ahooks": "^3.7.11",
+    "antd": "^5",
+    "copy-to-clipboard": "^3.3.3",
+    "mitt": "^3.0.1",
+    "react-beautiful-dnd": "^13.1.1",
+    "react-quill": "^2.0.0",
+    "simple-mind-map": "^0.9.11",
+    "tributejs": "^5.1.3",
+    "ts-md5": "^1.3.1"
+  },
+  "devDependencies": {
+    "@ant-design/cssinjs": "1.20.0",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/line-clamp": "^0.4.4",
+    "@tailwindcss/typography": "^0.5.12",
+    "@types/react": "^18.2.73",
+    "@types/react-beautiful-dnd": "^13.1.8",
+    "@types/react-dom": "^18.2.23",
+    "@umijs/openapi": "^1.11.1",
+    "husky": "^8",
+    "lint-staged": "^13",
+    "prettier": "^3.2.5",
+    "prettier-plugin-organize-imports": "^3.2.2",
+    "prettier-plugin-packagejson": "^2.4.3",
+    "prettier-plugin-tailwindcss": "^0.5.7",
+    "tailwindcss": "^3",
+    "typescript": "^4"
+  }
+}

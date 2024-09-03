@@ -1,0 +1,27 @@
+@menu-width: 220px;
+
+.settings-menu {
+  position: relative;
+  width: @menu-width;
+  height: 100vh;
+  box-sizing: border-box;
+  user-select: none;
+  box-shadow: inset -1px 0 0 #f0f0f0;
+
+  .title-box {
+    height: 50px;
+    white-space: nowrap;
+    padding: 0 12px;
+    box-shadow: inset 0 -1px 0 #f0f0f0;
+  }
+  .menus {
+    border: 0;
+    padding: 8px;
+    background: transparent;
+  }
+  :global {
+    .ant-menu-vertical {
+      border-inline-end: 0 !important;
+    }
+  }
+}

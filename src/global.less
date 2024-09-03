@@ -1,0 +1,60 @@
+body {
+  //--primary-color: 59, 130, 246;
+  //--primary-color: 22, 93, 255;
+  //--primary-color: 0, 185, 107;
+  //--primary-color: 146, 84, 222;
+  --primary-color: 20, 201, 201;
+}
+
+.ant-modal-header {
+  margin-bottom: 0 !important;
+}
+
+.task-detail-modal {
+  .ant-modal-content {
+    padding-bottom: 0;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+}
+
+/* 隐藏默认滚动条 */
+.g-custom-y-scroll {
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+
+  &:hover {
+    scrollbar-color: #999 transparent;
+
+    &::-webkit-scrollbar-track {
+      background-color: #f0f0f0;
+      /* 你可以设置轨道的颜色 */
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #999;
+      /* 你可以设置滑块的颜色 */
+    }
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+}
+.hidden-scrollbar {
+  /* IE and Edge */
+  -ms-overflow-style: none;
+    /* Firefox */
+  scrollbar-width: none;
+
+    /* Safari and Chrome */
+  &::-webkit-scrollbar {
+    display: none
+  }
+}

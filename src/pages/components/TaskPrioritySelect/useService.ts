@@ -1,0 +1,21 @@
+import Api from '@/api/modules';
+import { useRequest } from '@umijs/max';
+import { useState } from 'react';
+
+export default () => {
+  const {
+    data,
+    loading,
+    run: getData,
+  } = useRequest(() => Api.TaskPriority.getTaskPriorityList({}), {
+    manual: true,
+  });
+  const [open, setOpen] = useState(false);
+  return {
+    open,
+    setOpen,
+    loading,
+    data,
+    getData,
+  };
+};
