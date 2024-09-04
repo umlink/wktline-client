@@ -2,7 +2,7 @@ import { defineConfig } from '@umijs/max';
 import routes from './routes';
 
 export default defineConfig({
-  title: '开天刃',
+  title: 'wktline-项目管理',
   favicons: ['https://static.web3ling.com/004b68991c74c3d0fd97f61bc4bd97b0.ico'],
   antd: {},
   access: {},
