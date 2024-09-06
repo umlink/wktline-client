@@ -27,3 +27,9 @@ yarn run dev
 ```base
 yarn run genapi
 ```
+
+### changelog
+
+- 20240906
+  - 依赖升级
+  - 任务详情标题更新太过频繁

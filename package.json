@@ -8,7 +8,7 @@
     "genapi": "ts-node openapi.config.ts",
     "postinstall": "max setup",
     "prepare": "husky install",
-    "publish": "max build && scp -r ./dist/* root@121.121.121.121:/usr/share/nginx/html/",
+    "publish": "max build && scp -r ./dist/* root@121.40.42.56:/usr/share/nginx/html/",
     "setup": "max setup",
     "start": "npm run dev"
   },
@@ -22,7 +22,7 @@
     "@umijs/max": "^4.1.6",
     "@umlink/rc-gantt": "^0.0.1",
     "ahooks": "^3.7.11",
-    "antd": "^5",
+    "antd": "^5.20.5",
     "copy-to-clipboard": "^3.3.3",
     "mitt": "^3.0.1",
     "react-beautiful-dnd": "^13.1.1",
@@ -32,7 +32,7 @@
     "ts-md5": "^1.3.1"
   },
   "devDependencies": {
-    "@ant-design/cssinjs": "1.20.0",
+    "@ant-design/cssinjs": "1.21.0",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/line-clamp": "^0.4.4",
     "@tailwindcss/typography": "^0.5.12",

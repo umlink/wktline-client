@@ -250,7 +250,7 @@ const useTaskDetail = () => {
   };
 
   // 更新任务
-  const updateTaskInfo = (params: Partial<API.UpdateTaskReq>) => {
+  const updateTaskInfo = (params: Partial<API.UpdateTaskReq>, callback?: () => void) => {
     const taskId = data.taskId!;
     params.id = taskId;
     params.projectId = data.projectId;
@@ -266,6 +266,7 @@ const useTaskDetail = () => {
       if (params.handlerId) {
         getTaskActorList(taskId);
       }
+      callback?.();
     });
   };
 
@@ -386,10 +387,12 @@ const useTaskDetail = () => {
     getInitData(taskId);
   };
 
-  // 关闭弹窗
+  // 关闭弹窗，此处关闭时可根据实际情况更新需要延迟处理的数据
   const onHide = () => {
-    resetInitData();
-    EventBus.emit(EVENTS.UPDATE_TASK_CALLBACK, data.taskId);
+    updateTaskInfo({ name: data.task?.name }, () => {
+      EventBus.emit(EVENTS.UPDATE_TASK_CALLBACK, data.taskId);
+      resetInitData();
+    });
   };
 
   // 显示弹窗 有任务id才开始请求

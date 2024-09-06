@@ -11,8 +11,8 @@ import {
   User,
 } from '@icon-park/react';
 import { useModel } from '@umijs/max';
-import { useDebounceFn } from 'ahooks';
 import { App, Col, Input, Modal, Row, Spin } from 'antd';
+import { ChangeEventHandler } from 'react';
 import ChildTask from './components/ChildTask';
 import Comment from './components/Comment';
 import LaborHourCpt from './components/LaborHourCpt';
@@ -27,21 +27,16 @@ import TaskTitle from './components/TaskTitle';
 import UserSelect from './components/UserSelect';
 
 const TaskDetailModal = () => {
-  const { data, loading, setData, onHide, updateTaskInfo, uploadAttachment, removeResource } = useModel('taskDetail');
+  const { data, loading, setData, uploadAttachment, removeResource } = useModel('taskDetail');
 
   const modalStyle = {
     header: { padding: 0 },
     body: { padding: 0 },
   };
 
-  const { run: onTaskTitleChange } = useDebounceFn(
-    (e) => {
-      updateTaskInfo({
-        name: e.target.value,
-      });
-    },
-    { wait: 300 },
-  );
+  const onTaskTitleChange: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
+    data.task!.name = e.target.value;
+  };
 
   // 新增条目时请抽离代码 THX
   const TaskItems = [
@@ -109,7 +104,6 @@ const TaskDetailModal = () => {
       footer={null}
       closable={false}
       destroyOnClose={true}
-      onCancel={onHide}
       styles={modalStyle}
       style={{ top: 16, padding: 0 }}
       className={'[&_.ant-modal-content]:!p-0'}
