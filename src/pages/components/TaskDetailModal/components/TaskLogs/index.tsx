@@ -36,8 +36,12 @@ export default () => {
   useEffect(() => {
     try {
       EventBus.on(EVENTS.TASK_LOG_SCROLL, (isTop) => {
-        let scrollHeight = isTop ? 0 : logRef.current!.clientHeight;
-        setTimeout(() => (logRef.current!.scrollTop = scrollHeight), 100);
+        let scrollHeight = isTop ? 0 : logRef.current?.clientHeight || 0;
+        setTimeout(() => {
+          if (logRef.current) {
+            logRef.current.scrollTop = scrollHeight;
+          }
+        }, 100);
       });
     } catch (e) {
       console.log('调试出现，忽略', e);

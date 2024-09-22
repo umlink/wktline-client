@@ -27,7 +27,7 @@ import TaskTitle from './components/TaskTitle';
 import UserSelect from './components/UserSelect';
 
 const TaskDetailModal = () => {
-  const { data, loading, setData, uploadAttachment, removeResource } = useModel('taskDetail');
+  const { data, loading, onHide, setData, uploadAttachment, removeResource } = useModel('taskDetail');
 
   const modalStyle = {
     header: { padding: 0 },
@@ -96,7 +96,7 @@ const TaskDetailModal = () => {
 
   return (
     <Modal
-      title={<TaskTitle />}
+      title={<TaskTitle key={data.task?.id} />}
       open={data.show}
       wrapClassName={'task-detail-modal'}
       width={1000}
@@ -106,11 +106,13 @@ const TaskDetailModal = () => {
       destroyOnClose={true}
       styles={modalStyle}
       style={{ top: 16, padding: 0 }}
+      onClose={onHide}
+      onCancel={onHide}
       className={'[&_.ant-modal-content]:!p-0'}
     >
       <App>
         <Spin tip="Loading..." spinning={!data.task && loading}>
-          <div className={'h-[calc(100vh-90px)] bg-white'}>
+          <div className={'h-[calc(100vh-90px)] bg-white'} key={data.task?.id}>
             <div className={'box-border flex h-full'}>
               <div className={'h-full w-full border-r border-r-gray-100'}>
                 <div className={'h-[calc(100%-2px)] w-full min-w-[600px] overflow-y-auto px-5 pb-5 pl-8 pt-3'}>

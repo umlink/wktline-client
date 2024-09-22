@@ -15,9 +15,6 @@ export default defineConfig({
   cssLoaderModules: {
     exportLocalsConvention: 'camelCase',
   },
-  theme: {
-    '@primary-color': '#00b96b',
-  },
   cssMinifier: 'none',
   proxy: {
     '/wkt-api': {

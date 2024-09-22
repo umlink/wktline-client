@@ -389,6 +389,7 @@ const useTaskDetail = () => {
 
   // 关闭弹窗，此处关闭时可根据实际情况更新需要延迟处理的数据
   const onHide = () => {
+    setData({ show: false });
     updateTaskInfo({ name: data.task?.name }, () => {
       EventBus.emit(EVENTS.UPDATE_TASK_CALLBACK, data.taskId);
       resetInitData();
