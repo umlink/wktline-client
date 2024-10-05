@@ -16,6 +16,7 @@ export default defineConfig({
     exportLocalsConvention: 'camelCase',
   },
   cssMinifier: 'none',
+  esbuildMinifyIIFE: true,
   proxy: {
     '/wkt-api': {
       target: 'http://127.0.0.1:9002',

@@ -391,8 +391,8 @@ const useTaskDetail = () => {
   const onHide = () => {
     setData({ show: false });
     updateTaskInfo({ name: data.task?.name }, () => {
-      EventBus.emit(EVENTS.UPDATE_TASK_CALLBACK, data.taskId);
       resetInitData();
+      EventBus.emit(EVENTS.UPDATE_TASK_CALLBACK, data.taskId);
     });
   };
 

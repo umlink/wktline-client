@@ -35,6 +35,7 @@ const TaskDetailModal = () => {
   };
 
   const onTaskTitleChange: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
+    if (data.task?.name === e.target.value) return
     data.task!.name = e.target.value;
   };
 
