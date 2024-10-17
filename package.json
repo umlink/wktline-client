@@ -1,6 +1,7 @@
 {
   "private": true,
   "author": "umlink <link_0403@163.com>",
+  "licence": "GPL",
   "scripts": {
     "build": "max build",
     "dev": "max dev",
