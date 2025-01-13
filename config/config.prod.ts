@@ -5,7 +5,7 @@ export default defineConfig({
   esbuildMinifyIIFE: true,
   codeSplitting: { jsStrategy: 'depPerChunk' },
   chainWebpack(config) {
-    config.output.chunkFilename('[contenthash:16].js');
+    // config.output.chunkFilename('[contenthash:16].js');
     config.plugin('compression-webpack-plugin').use(require('compression-webpack-plugin'), [
       {
         test: /.(js|css|html)$/i, // 匹配
@@ -17,16 +17,14 @@ export default defineConfig({
       optimization: {
         minimize: true,
         splitChunks: {
-          chunks: 'async',
+          chunks: 'all',
           minSize: 30000,
-          minChunks: 1,
+          maxSize: 50000,
           automaticNameDelimiter: '.',
           cacheGroups: {
             vendors: {
-              name: 'vendors',
-              chunks: 'all',
               test: /[\\/]node_modules[\\/]/,
-              priority: -12,
+              priority: -10,
             },
             react: {
               test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
@@ -56,19 +54,25 @@ export default defineConfig({
               test: /[\\/]node_modules[\\/]antd[\\/]/,
               name: 'antd',
               chunks: 'all',
-              priority: 20, // 优先级高于 vendors
+              priority: 10,
+            },
+            antv: {
+              test: /[\\/]node_modules[\\/]@antv[\\/]/,
+              name: 'antv',
+              chunks: 'all',
+              priority: 10,
             },
             tributejs: {
               test: /[\\/]node_modules[\\/]tributejs[\\/]/,
               name: 'tributejs',
               chunks: 'all',
-              priority: 20, // 优先级高于 vendors
+              priority: 10,
             },
             antdPlot: {
               test: /[\\/]node_modules[\\/]@ant-design\/plots[\\/]/,
               name: 'antd-plots',
               chunks: 'all',
-              priority: 1, // 优先级高于 vendors
+              priority: 10,
             },
             dndKit: {
               test: /[\\/]node_modules[\\/](@dnd-kit)[\\/]/,
