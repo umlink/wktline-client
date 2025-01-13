@@ -11,6 +11,7 @@ import {
   User,
 } from '@icon-park/react';
 import { useModel } from '@umijs/max';
+import { useDebounceFn } from 'ahooks';
 import { App, Col, Input, Modal, Row, Spin } from 'antd';
 import { ChangeEventHandler } from 'react';
 import ChildTask from './components/ChildTask';
@@ -27,16 +28,20 @@ import TaskTitle from './components/TaskTitle';
 import UserSelect from './components/UserSelect';
 
 const TaskDetailModal = () => {
-  const { data, loading, onHide, setData, uploadAttachment, removeResource } = useModel('taskDetail');
+  const { data, loading, onHide, setData, uploadAttachment, removeResource, updateTaskInfo } = useModel('taskDetail');
 
   const modalStyle = {
     header: { padding: 0 },
     body: { padding: 0 },
   };
 
+  const { run: updateTitle } = useDebounceFn(({ id, projectId, name }) => updateTaskInfo({ id, projectId, name }), {
+    wait: 500,
+  });
+
   const onTaskTitleChange: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
-    if (data.task?.name === e.target.value) return
-    data.task!.name = e.target.value;
+    if (!e.target.value) return;
+    updateTitle({ name: e.target.value, id: data.taskId, projectId: data.projectId });
   };
 
   // 新增条目时请抽离代码 THX

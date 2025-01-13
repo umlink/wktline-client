@@ -6,13 +6,13 @@ export default defineConfig({
   codeSplitting: { jsStrategy: 'depPerChunk' },
   chainWebpack(config) {
     // config.output.chunkFilename('[contenthash:16].js');
-    config.plugin('compression-webpack-plugin').use(require('compression-webpack-plugin'), [
-      {
-        test: /.(js|css|html)$/i, // 匹配
-        threshold: 10240, // 超过10k的文件压缩
-        deleteOriginalAssets: false, // 不删除源文件
-      },
-    ]);
+    // config.plugin('compression-webpack-plugin').use(require('compression-webpack-plugin'), [
+    //   {
+    //     test: /.(js|css|html)$/i, // 匹配
+    //     threshold: 10240, // 超过10k的文件压缩
+    //     deleteOriginalAssets: false, // 不删除源文件
+    //   },
+    // ]);
     config.merge({
       optimization: {
         minimize: true,
@@ -85,6 +85,12 @@ export default defineConfig({
               name: 'simple-mind-map',
               chunks: 'all',
               priority: 15,
+            },
+            commons: {
+              name: 'commons',
+              minChunks: 2,
+              priority: -20,
+              reuseExistingChunk: true,
             },
           },
         },
