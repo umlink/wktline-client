@@ -9,7 +9,7 @@ import Filter from './Filter';
  * */
 const viewMap: { [key in ViewTypeFilterKey]: any } = {
   CARD: React.lazy(() => import('./components/Card')),
-  TABLE: React.lazy(() => import('./components/Gantt')),
+  TABLE: React.lazy(() => import('./components/Table')),
   GANTT: React.lazy(() => import('./components/Gantt')),
 };
 
