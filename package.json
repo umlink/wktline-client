@@ -9,7 +9,8 @@
     "genapi": "ts-node openapi.config.ts",
     "postinstall": "max setup",
     "prepare": "husky install",
-    "publish": "max build && scp -r ./dist/* root@121.40.42.56:/usr/share/nginx/html/",
+    "build:publish": "max build && scp -r ./dist/* root@121.40.42.56:/usr/share/nginx/html/",
+    "publish": "scp -r ./dist/* root@121.40.42.56:/usr/share/nginx/html/",
     "setup": "max setup",
     "start": "npm run dev"
   },
@@ -23,7 +24,7 @@
     "@umijs/max": "^4.1.6",
     "@umlink/rc-gantt": "^0.0.1",
     "ahooks": "^3.7.11",
-    "antd": "^5.20.5",
+    "antd": "^5.23.0",
     "copy-to-clipboard": "^3.3.3",
     "mitt": "^3.0.1",
     "react-beautiful-dnd": "^13.1.1",
