@@ -11,9 +11,8 @@ import {
   User,
 } from '@icon-park/react';
 import { useModel } from '@umijs/max';
-import { useDebounceFn } from 'ahooks';
 import { App, Col, Input, Modal, Row, Spin } from 'antd';
-import { ChangeEventHandler } from 'react';
+import { ChangeEventHandler, useCallback, useEffect, useState } from 'react';
 import ChildTask from './components/ChildTask';
 import Comment from './components/Comment';
 import LaborHourCpt from './components/LaborHourCpt';
@@ -28,6 +27,7 @@ import TaskTitle from './components/TaskTitle';
 import UserSelect from './components/UserSelect';
 
 const TaskDetailModal = () => {
+  const [tmpTitle, setTmpTitle] = useState<string | undefined>();
   const { data, loading, onHide, setData, uploadAttachment, removeResource, updateTaskInfo } = useModel('taskDetail');
 
   const modalStyle = {
@@ -35,14 +35,29 @@ const TaskDetailModal = () => {
     body: { padding: 0 },
   };
 
-  const { run: updateTitle } = useDebounceFn(({ id, projectId, name }) => updateTaskInfo({ id, projectId, name }), {
-    wait: 500,
-  });
-
   const onTaskTitleChange: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     if (!e.target.value) return;
-    updateTitle({ name: e.target.value, id: data.taskId, projectId: data.projectId });
+    setTmpTitle(e.target.value);
   };
+
+  const onClose = useCallback(() => {
+    if (tmpTitle !== data.task?.name) {
+      return updateTaskInfo({ name: tmpTitle }, onHide);
+    }
+    onHide();
+  }, [tmpTitle, data.task]);
+
+  const onBlur = useCallback(() => {
+    if (tmpTitle !== data.task?.name) {
+      updateTaskInfo({ name: tmpTitle });
+    }
+  }, [tmpTitle, data.task]);
+
+  useEffect(() => {
+    if (data.show) {
+      setTmpTitle(data.task?.name);
+    }
+  }, [data.show]);
 
   // 新增条目时请抽离代码 THX
   const TaskItems = [
@@ -102,7 +117,7 @@ const TaskDetailModal = () => {
 
   return (
     <Modal
-      title={<TaskTitle key={data.task?.id} />}
+      title={<TaskTitle onClose={onClose} key={data.task?.id} />}
       open={data.show}
       wrapClassName={'task-detail-modal'}
       width={1000}
@@ -112,8 +127,8 @@ const TaskDetailModal = () => {
       destroyOnClose={true}
       styles={modalStyle}
       style={{ top: 16, padding: 0 }}
-      onClose={onHide}
-      onCancel={onHide}
+      onClose={onClose}
+      onCancel={onClose}
       className={'[&_.ant-modal-content]:!p-0'}
     >
       <App>
@@ -128,6 +143,7 @@ const TaskDetailModal = () => {
                       className={'p-2 text-lg !font-semibold focus:bg-gray-50'}
                       defaultValue={data.task?.name}
                       placeholder={'请设置任务名'}
+                      onBlur={onBlur}
                       onChange={onTaskTitleChange}
                       variant="borderless"
                     />

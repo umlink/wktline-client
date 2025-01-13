@@ -3,9 +3,9 @@ import { AddSubset, Back, CategoryManagement, Close, CopyLink, Delete } from '@i
 import { useModel } from '@umijs/max';
 import { App, Button, Space } from 'antd';
 
-const TaskTitle = () => {
+const TaskTitle = ({ onClose }: { onClose: () => void }) => {
   const { modal } = App.useApp();
-  const { data, onHide, delTaskById, updateTaskInfo, getPrevTaskDetail, lookParentTask } = useModel('taskDetail');
+  const { data, delTaskById, updateTaskInfo, getPrevTaskDetail, lookParentTask } = useModel('taskDetail');
 
   const handleDelTask = () => {
     modal.confirm({
@@ -59,7 +59,7 @@ const TaskTitle = () => {
             onClick={handleDelTask}
             icon={<Delete theme="outline" size="16" />}
           />
-          <Button onClick={onHide} type="text" icon={<Close theme="outline" size="16" fill="#666" />} />
+          <Button onClick={onClose} type="text" icon={<Close theme="outline" size="16" fill="#666" />} />
         </Space>
       </div>
     </div>
